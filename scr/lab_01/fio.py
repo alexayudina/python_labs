@@ -1,0 +1,5 @@
+fio = input("ФИО: ")
+fio=fio.split()
+print(fio)
+print(f"Инициалы:{(fio[0][:1]).upper()}{(fio[1][:1]).upper()}{(fio[2][:1]).upper()}")
+print(len(fio[0])+len(fio[2])+len(fio[1])+2)
