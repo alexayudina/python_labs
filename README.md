@@ -43,6 +43,10 @@ print(f"{m//60}:{m%60}")
 
 ## Задание 5
 ```bash
-
+fio = input("ФИО: ")
+fio=fio.split()
+print(fio)
+print(f"Инициалы:{(fio[0][:1]).upper()}{(fio[1][:1]).upper()}{(fio[2][:1]).upper()}")
+print(len(fio[0])+len(fio[2])+len(fio[1])+2)
 ```
 <img width="1774" height="844" alt="fio" src="https://github.com/user-attachments/assets/1c8aa8ab-beeb-4839-ab86-001be3f61cb7" />
