@@ -152,4 +152,3 @@ print(format_record(("  сидорова  анна   сергеевна ", "ABB-
 print(format_record(("Иванов Иван Иванович","BIVT-25", 4.5))) 
 ```
 
-<img width="1774" height="844" alt="fio" src="https://github.com/user-attachments/assets/1c8aa8ab-beeb-4839-ab86-001be3f61cb7" />
