@@ -1,8 +1,6 @@
 # Лабораторная работа 3
 ## Задание A — `src/lib/text.py`
 
-Реализуйте функции:
-
 1. `normalize`  
 ```
 def normalize(text: str, *, casefold: bool = True, yo2e: bool = True) -> str:
