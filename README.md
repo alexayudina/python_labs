@@ -48,7 +48,7 @@ def count_freq(tokens: list[str]) -> dict[str, int]:
     return c
 def top_n(freq: dict[str, int], n: int = 5) -> list[tuple[str, int]]:
     t = []
-    for w, count in freq.items():
+    for w, count in freq.items(): #.items() - метод словаря, который возвращает пары (ключ, значение)
         t.append((-count, w))
     t.sort()
     result = []
