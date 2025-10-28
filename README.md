@@ -39,7 +39,7 @@ write_csv([("word","count"),("test",3)], "scr/lab_4/data/check.csv")
 <img width="1254" height="254" alt="chek" src="https://github.com/user-attachments/assets/9ecc0895-ea43-4992-b84a-377138c9f136" />
 
 ## Задание B — скрипт src/lab04/text_report.py
-```
+```python
 from io_txt_csv import read_text, write_csv, ensure_parent_dir
 import sys
 from pathlib import Path
