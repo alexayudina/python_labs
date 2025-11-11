@@ -1,26 +1,26 @@
 ## Лабораторная работа 5
 ### Задание A — JSON ↔ CSV
 ```python
-import csv, json, sys, os
+import csv, json, sys, os 
 from pathlib import Path 
 
-def right_json(path: str)-> bool:
+def right_json(path: str)-> bool: # Функция проверки что файл имеет расширение .json
     path=Path(path)
-    if path.suffix.lower() != ".json":
+    if path.suffix.lower() != ".json":  # Проверяем расширение файла (приводим к нижнему регистру)
         return False
 
-def right_csv(path: str)-> bool:
+def right_csv(path: str)-> bool:  # Функция проверки что файл имеет расширение .csv
     path=Path(path)
     if path.suffix.lower() != ".csv":
         return False
     
-def is_valid_json_file(file_path: str) -> bool:
+def is_valid_json_file(file_path: str) -> bool: # Функция проверки валидности JSON файла
     try:
-        if not os.path.exists(file_path) or os.path.getsize(file_path) == 0:
+        if not os.path.exists(file_path) or os.path.getsize(file_path) == 0: # Проверяем что файл существует и не пустой
             return False
         
         with open(file_path, 'r', encoding='utf-8') as file:
-            json_data = json.load(file)
+            json_data = json.load(file)  # Загружаем и парсим JSON данные из файла
             return isinstance(json_data, list) and len(json_data) > 0 and all(isinstance(item, dict) for item in json_data) #все элементы в списке являются словарями
     except:
         return False
