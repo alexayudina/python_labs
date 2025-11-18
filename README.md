@@ -74,9 +74,10 @@ if __name__ == "__main__":
     main()
 ```
 ### Вывод строк с номерами:
-![Картинка 1](./images/image01.png)
+<img width="1012" height="139" alt="image01" src="https://github.com/user-attachments/assets/85278da2-6368-44d7-9afd-879765fdd2b6" />
 ### Вывод топ слов:
-![Картинка 1](./images/image02.png)
+<img width="813" height="364" alt="image02" src="https://github.com/user-attachments/assets/c433b1ba-1368-4e62-a2d2-3ea1d9aa39e2" />
+
 
 ### cli_convert.py
 
@@ -144,12 +145,12 @@ if __name__ == "__main__":
     sys.exit(cli_convert())
 ```
 ### Вывод JSON -> CSV:
-![Картинка 1](./images/image03.png)
-![Картинка 1](./images/image04.png)
-![Картинка 1](./images/image05.png)
+<img width="1356" height="77" alt="image03" src="https://github.com/user-attachments/assets/011ef1fa-972c-4102-a9d1-2d178b4ec798" />
+<img width="405" height="287" alt="image04" src="https://github.com/user-attachments/assets/edf9b85e-4979-4091-b701-16cfb79485bc" />
+<img width="343" height="143" alt="image05" src="https://github.com/user-attachments/assets/9e140b15-8979-49b6-89f7-c5a880009f38" />
 ### Вывод CSV -> JSON:
-![Картинка 1](./images/image06.png)
+<img width="1333" height="92" alt="image06" src="https://github.com/user-attachments/assets/8ac9479a-5c78-41a9-a50e-d3f96968fbbf" />
 ### Вывод CSV -> XLSX:
-![Картинка 1](./images/image07.png)
+<img width="1264" height="79" alt="image07" src="https://github.com/user-attachments/assets/ca978c5a-6540-42ef-9d5c-3abe67799a14" />
 ### Help:
-![Картинка 1](./images/image08.png)
+<img width="764" height="205" alt="image08" src="https://github.com/user-attachments/assets/97815909-f46c-4ac0-b75e-6818628a7b8f" />
