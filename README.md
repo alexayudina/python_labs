@@ -149,9 +149,12 @@ if __name__ == "__main__":
 <img width="1356" height="77" alt="image03" src="https://github.com/user-attachments/assets/011ef1fa-972c-4102-a9d1-2d178b4ec798" />
 <img width="405" height="287" alt="image04" src="https://github.com/user-attachments/assets/edf9b85e-4979-4091-b701-16cfb79485bc" />
 <img width="343" height="143" alt="image05" src="https://github.com/user-attachments/assets/9e140b15-8979-49b6-89f7-c5a880009f38" />
+
 ### Вывод CSV -> JSON:
 <img width="1333" height="92" alt="image06" src="https://github.com/user-attachments/assets/8ac9479a-5c78-41a9-a50e-d3f96968fbbf" />
+
 ### Вывод CSV -> XLSX:
 <img width="1264" height="79" alt="image07" src="https://github.com/user-attachments/assets/ca978c5a-6540-42ef-9d5c-3abe67799a14" />
+
 ### Help:
 <img width="764" height="205" alt="image08" src="https://github.com/user-attachments/assets/97815909-f46c-4ac0-b75e-6818628a7b8f" />
