@@ -75,6 +75,7 @@ if __name__ == "__main__":
 ```
 ### Вывод строк с номерами:
 <img width="1012" height="139" alt="image01" src="https://github.com/user-attachments/assets/85278da2-6368-44d7-9afd-879765fdd2b6" />
+
 ### Вывод топ слов:
 <img width="813" height="364" alt="image02" src="https://github.com/user-attachments/assets/c433b1ba-1368-4e62-a2d2-3ea1d9aa39e2" />
 
