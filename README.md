@@ -310,7 +310,7 @@ def test_csv_to_json_wrong_extension(tmp_path):
 <img width="1100" height="234" alt="image04" src="https://github.com/user-attachments/assets/f06ba800-cd88-4f5e-aee7-aede42270939" />
 <img width="516" height="89" alt="image05" src="https://github.com/user-attachments/assets/e7a55623-3d1a-4d36-9b94-cad7af3414fc" />
 
-### ★ Дополнительное задание
+###
 <img width="1431" height="951" alt="image06" src="https://github.com/user-attachments/assets/ad987180-2ffa-42bc-83fc-223717ef6ba4" />
 <img width="1444" height="962" alt="image07" src="https://github.com/user-attachments/assets/8d8c0d33-7ae0-43c1-95fa-b92be3fb399b" />
 <img width="1418" height="882" alt="image08" src="https://github.com/user-attachments/assets/379b618b-73db-41d1-99ab-7a9761eae764" />
