@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "python_labs"
-version = "24.11.2025"
+version = "1.00.2025"
 dependencies = []
 
 [project.optional-dependencies]
@@ -13,34 +13,27 @@ dev = [
     "pytest-cov>=5.0.0",
     "black>=24.0.0",
 ]
-dependencies=[]
 
 [tool.black]
+skip-string-normalization = true
 line-length = 88
 target-version = ['py38']
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-python_files = "test_*.py"
+python_files = "ex_*.py"
 python_classes = "Test*"
 python_functions = "test_*"
 addopts = "-v --cov=src --cov-report=term-missing"
 
 [tool.coverage.run]
-source = ["src"]
+source = ["laba_prog"]
 omit = [
     "*/test_*",
     "*/__pycache__/*",
-    "*/csv_xlsx.py",
-    "*/lib/csv_xlsx.py",
-    "*/samples.py", 
-    "*/arrays.py",
-    "*/matrix.py",
-    "*/io_txt_csv.py",
-    "*/text_report.py",
-    "*/text_stats.py",
-    "*/tuples.py",
     "*/lib/__init__.py*",
     "*/lib/json_csv.py*",
-    "*/lab_5/__init__.py*"
+    "*/tests/__init__.py*",
+    "*/src/lib.py*",
+     "*/src/__init__.py*" 
 ]
