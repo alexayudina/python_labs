@@ -314,6 +314,8 @@ def test_csv_to_json_wrong_extension(tmp_path):
 <img width="1431" height="951" alt="image06" src="https://github.com/user-attachments/assets/ad987180-2ffa-42bc-83fc-223717ef6ba4" />
 <img width="1444" height="962" alt="image07" src="https://github.com/user-attachments/assets/8d8c0d33-7ae0-43c1-95fa-b92be3fb399b" />
 <img width="1418" height="882" alt="image08" src="https://github.com/user-attachments/assets/379b618b-73db-41d1-99ab-7a9761eae764" />
+
 #### 100% покрытие — каждая строчка кода была выполнена хотя бы раз каким-то тестом
 #### Меньше 100% — остались строки, которые ни один тест не затронул
+
 <img width="1402" height="232" alt="image09" src="https://github.com/user-attachments/assets/02b4e0f5-5f63-4896-837a-ee18dba8cdbf" />
