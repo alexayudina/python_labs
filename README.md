@@ -1,54 +1,114 @@
-# Лабораторная работа 1
+## Лабораторная работа 9
+### A. Реализовать класс Student (models.py)
+```python
+import csv
+from pathlib import Path
+from models import student 
+import sys
+from typing import List
+sys.path.append(r"C:\Users\HONOR\Documents\GitHub\laba_prog\src")
+class Group():
+    def __init__(self, storage_path: str):
+        self.path = Path(storage_path)
+        if not self.path.exists():
+            self.path.write_text("", encoding='utf-8')
+        if not self.path.read_text(encoding='utf-8').split('\n')[0] == 'fio,birthdate,group,gpa': # Проверка корректности заголовка CSV файла
+            raise ValueError('Не корректный заголовок')
+        with open(self.path, 'r', encoding='utf-8') as f:
+            rd = list(csv.DictReader(f))
+            [student.from_dict(st) for st in rd] # Создание объектов student из каждого словаря
 
-## Задание 1
-```bash
-name = input("Имя: ")
-age = int(input("Возраст: "))
-print(f"Привет, {name}! Через год тебе будет {age+1}.")
+    def _ensure_storage_exists(self): # Метод для обеспечения существования файла хранилища
+        if not self.path.exists():
+            self.path.parent.mkdir(parents=True, exist_ok=True)
+            with open(self.path, 'w', encoding='utf-8') as f:
+                f.write('fio,birthdate,group,gpa\n')
+
+    def _read_all(self) -> List[dict]: # Метод для чтения всех данных из файла
+        self._ensure_storage_exists()
+        with open(self.path, 'r', encoding='utf-8') as f:
+            return list(csv.DictReader(f))
+
+    def list(self): # Метод для получения списка всех студентов в виде списка строк
+        with open(self.path, 'r', encoding='utf-8') as f:
+            rd = csv.reader(f)
+            next(rd)
+            students = list(rd)
+        return students
+    
+    def _write_all(self, students: List[dict]): # Метод для записи всех данных в файл
+        with open(self.path, 'w', encoding='utf-8', newline='') as f:
+            writer = csv.DictWriter(f, fieldnames=['fio', 'birthdate', 'group', 'gpa'])
+            writer.writeheader()
+            writer.writerows(students)
+
+    def add(self, student: student): # Метод для добавления нового студента
+        rows = self._read_all()
+        if any(row['fio'] == student.fio for row in rows):
+            raise ValueError(f"Студент {student.fio} уже существует")
+        rows.append({
+            'fio': student.fio,
+            'birthdate': student.birthdate,
+            'group': student.group,
+            'gpa': str(student.gpa)
+        })
+        self._write_all(rows)
+    
+
+    def find(self, substr: str): # Метод для поиска студентов по подстроке в ФИО
+        with open(self.path, 'r', encoding='utf-8') as f:
+            rd = list(csv.DictReader(f))
+        return [student.from_dict(r) for r in rd if substr in r['fio']]
+    
+    def remove(self, fio: str): # Метод для удаления студента по ФИО
+        with open(self.path, 'r', encoding='utf-8') as f:
+            rd = csv.DictReader(f)
+            data_new = [r for r in rd if fio not in r['fio']]
+        with open(self.path, 'w', newline='', encoding='utf-8') as f:
+            wr = csv.DictWriter(f, fieldnames=list(data_new[0].keys()))
+            wr.writeheader()
+            wr.writerows(data_new)
+
+    def update(self, fio: str, **fields): # Метод для обновления данных студента
+        data = student.from_dict({'fio': fio, **fields}).to_dict()
+        data.pop('fio')
+        with open(self.path, 'r', encoding='utf-8') as f:
+            rd = list(csv.DictReader(f))
+            for r in rd:
+                if fio in r['fio']:
+                    r.update(data)
+                    break 
+        with open(self.path, 'w', newline='', encoding='utf-8') as f:
+            wr = csv.DictWriter(f, fieldnames=list(rd[0].keys()))
+            wr.writeheader()
+            wr.writerows(rd)
+if __name__ == "__main__":
+     group = Group(r'C:\Users\HONOR\Documents\GitHub\laba_prog\data\students.csv')
+     print(group.add(student('Юдина Александра Евгеньевна', '2007-05-15', 'БИВТ-25-1', 4.8)))
 ```
-<img width="1544" height="828" alt="hi" src="https://github.com/user-attachments/assets/96ef6458-59a9-457e-ab52-558c0faa0b70" />
 
-## Задание 2
-```bash
-a = (input("a:"))
-b = (input("b:"))
-a=a.replace(",",".",1)
-b=b.replace(",",".",1)
-a=float(a)
-b=float(b)
-print(f"sum={(a+b):.2f}; avg={((a+b)/2):.2f}")
+### Для Для list() 
+```python
+print(group.list())
 ```
-<img width="1142" height="807" alt="sum" src="https://github.com/user-attachments/assets/55e18727-8f53-4412-bef7-6ed30d4f88e8" />
-
-## Задание 3
-```bash
-price=int(input("price:"))
-discount=int(input("discount:"))
-vat=int(input("vat:"))
-base = price * (1 - discount/100)
-vat_amount = base * (vat/100)
-total = base + vat_amount
-print(f"База после скидки: {base:.2f} ₽")
-print(f"НДС:               {vat_amount:.2f} ₽")
-print(f"Итого к оплате:    {total:.2f} ₽")
+![Картинка 1](./images/image01.png)
+### Для Для add() 
+```python
+print(group.add(student('Юдина Александра Евгеньевна', '2007-05-15', 'БИВТ-25-1', 4.8)))
 ```
-<img width="1171" height="896" alt="discount" src="https://github.com/user-attachments/assets/9743294a-932b-4853-bae9-0b003febd015" />
-
-## Задание 4
-```bash
-m = int(input("Минуты:"))
-print(f"{m//60}:{m%60}")
+![Картинка 1](./images/image02.png)
+### Для Для find() 
+```python
+print(group.find('Иванов Иван Иванович'))
 ```
-<img width="1129" height="793" alt="min" src="https://github.com/user-attachments/assets/b68f5c8a-17c9-4dad-9fe8-da1e5953cd00" />
-
-## Задание 5
-```bash
-fio = input("ФИО: ")
-fio=fio.split()
-print(fio)
-print(f"Инициалы:{(fio[0][:1]).upper()}{(fio[1][:1]).upper()}{(fio[2][:1]).upper()}")
-print(len(fio[0])+len(fio[2])+len(fio[1])+2)
+![Картинка 1](./images/image03.png)
+### Для Для remove() 
+```python
+print(group.remove('Иванов Иван Иванович'))
 ```
-<img width="1774" height="844" alt="fio" src="https://github.com/user-attachments/assets/1c8aa8ab-beeb-4839-ab86-001be3f61cb7" />
-
-
+![Картинка 1](./images/image04.png)
+### Для Для update() 
+```python
+print(group.update('Васильев Дмитрий Андреевич', **{'birthdate': '2007.06/24', 'group': 'БИВТ-25-4', 'gpa': 4.2}))
+```
+![Картинка 1](./images/image05.png)
