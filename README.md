@@ -91,24 +91,29 @@ if __name__ == "__main__":
 ```python
 print(group.list())
 ```
-![Картинка 1](./images/image01.png)
+<img width="2484" height="194" alt="image01 " src="https://github.com/user-attachments/assets/19f8111a-97eb-4b1f-b6a2-cef15b58f401" />
+
 ### Для Для add() 
 ```python
 print(group.add(student('Юдина Александра Евгеньевна', '2007-05-15', 'БИВТ-25-1', 4.8)))
 ```
-![Картинка 1](./images/image02.png)
+<img width="952" height="322" alt="image02" src="https://github.com/user-attachments/assets/0213fd83-5d0f-4e17-bdc0-99a97f70b401" />
+
 ### Для Для find() 
 ```python
 print(group.find('Иванов Иван Иванович'))
 ```
-![Картинка 1](./images/image03.png)
+<img width="1418" height="87" alt="image03 " src="https://github.com/user-attachments/assets/f96847bc-0c85-456d-b00f-74522dfa64bd" />
+
 ### Для Для remove() 
 ```python
 print(group.remove('Иванов Иван Иванович'))
 ```
-![Картинка 1](./images/image04.png)
+<img width="1418" height="67" alt="image04 " src="https://github.com/user-attachments/assets/584d3c7a-4ee1-4bcb-880f-e87d016d5ea8" />
+
 ### Для Для update() 
 ```python
 print(group.update('Васильев Дмитрий Андреевич', **{'birthdate': '2007.06/24', 'group': 'БИВТ-25-4', 'gpa': 4.2}))
 ```
-![Картинка 1](./images/image05.png)
+<img width="954" height="276" alt="image05" src="https://github.com/user-attachments/assets/7359a0b2-544a-4b32-a06e-29eb80862939" />
+
