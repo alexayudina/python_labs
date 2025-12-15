@@ -103,7 +103,8 @@ print(f'Значение первого эллемента после добав
 print(f'Пустая ли очередь? {q.is_empty()}')
 print(f'Количество элементов в очереди : {len(q)}')
 ```
-![Картинка 1](./images/image01.png)
+<img width="1200" height="351" alt="image01" src="https://github.com/user-attachments/assets/7241b7f9-2a41-43a9-b9f1-df0ee7125584" />
+
 
 ### B. Реализовать SinglyLinkedList (src/lab10/linked_list.py)
 ```python
@@ -263,7 +264,8 @@ print(f'Односвязанный список после добавления 
 
 print(sll) 
 ```
-![Картинка 1](./images/image02.png)
+<img width="684" height="243" alt="image02" src="https://github.com/user-attachments/assets/9f7c97dc-a885-4b84-b6d1-41cd421eeb41" />
+
 ## Теоретическая часть
 ### Стек
 Стек (англ. Stack) — это структура данных, работающая по принципу LIFO (Last In, First Out), где последний добавленный элемент извлекается первым. 
