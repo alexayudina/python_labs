@@ -1,204 +1,155 @@
-from typing import Optional, Any
+from typing import Any, Iterator, Optional
 
-
+# Класс Node (узел) - базовый элемент связного списка
 class Node:
-    """
-    Класс Node представляет узел односвязного списка.
-    Каждый узел хранит значение и ссылку на следующий узел.
-    """
-    
-    def __init__(self, value: Any, next_node: Optional['Node'] = None):
-        # Значение, которое хранит узел (любого типа)
+    __slots__ = ("value", "next")
+
+    def __init__(self, value: Any, next: Optional["Node"] = None) -> None:
         self.value = value
-        
-        # Ссылка на следующий узел в списке
-        # None означает, что это последний узел
-        self.next = next_node  # Здесь сохраняем как self.next
+        self.next = next
+
+    # Метод для представления узла в виде строки
+    def __repr__(self) -> str:
+        return f"Node({self.value!r})"
 
 
 class SinglyLinkedList:
+    """Односвязный список.
+
+    Атрибуты:
+      - head, tail, _size
+
+    Методы:
+      - append(value)       O(1) Добавление в конец
+      - prepend(value)      O(1) Добавление в начало
+      - insert(idx, value)  O(min(idx, n)) — проход от головы
+      - remove(value)       O(n) — удаление первого вхождения (ValueError если не найдено)
+      - remove_at(idx)      O(n) — удаление по индексу (IndexError при некорректном индексе)
+      - __iter__, __len__, __repr__, __str__
     """
-    Класс SinglyLinkedList реализует односвязный список.
-    Состоит из узлов Node, связанных друг с другом через ссылки next.
-    """
-    
-    def __init__(self, items: Optional[list] = None):
-        # Голова списка - первый узел или None если список пуст
-        self.head = None
-        
-        # Количество элементов в списке (для быстрого получения длины)
-        self._size = 0
-        
-        # Опционально: инициализация списка начальными значениями
-        if items:
-            for item in items:
-                self.append(item)
+
+    __slots__ = ("head", "tail", "_size")
+
+    def __init__(self, iterable=None) -> None:
+        self.head: Optional[Node] =  # Первый узел списка
+        self.tail: Optional[Node] = None # Последний узел списка
+        self._size: int = 0
+        if iterable:
+            for v in iterable:
+                self.append(v)
 
     def append(self, value: Any) -> None:
-        """Добавить элемент в конец списка."""
-        new_node = Node(value)  # Создаем новый узел
-
-        # Если список пуст, новый узел становится головой
-        if self.head is None:
-            self.head = new_node
-            self._size += 1
-            return
-
-        # Иначе проходим до последнего узла
-        current = self.head
-        while current.next is not None:  # Ищем узел, у которого next = None
-            current = current.next
-
-        # Добавляем новый узел после последнего
-        current.next = new_node
+        """Добавить в конец — O(1)."""
+        node = Node(value)
+        if not self.head:
+            self.head = node
+            self.tail = node,
+        else:
+            assert self.tail is not None
+            self.tail.next = node
+            self.tail = node
         self._size += 1
 
     def prepend(self, value: Any) -> None:
-        """Добавить элемент в начало списка."""
-        # Создаем новый узел, который ссылается на текущую голову
-        new_node = Node(value, next_node=self.head)  # Используем next_node
-        
-        # Новый узел становится новой головой
-        self.head = new_node
+        """Добавить в начало — O(1)."""
+        node = Node(value, next=self.head)
+        self.head = node
+        if self._size == 0:
+            self.tail = node
         self._size += 1
 
     def insert(self, idx: int, value: Any) -> None:
-        """
-        Вставить элемент по указанному индексу.
-        
-        Args:
-            idx: Индекс для вставки (от 0 до размера списка)
-            value: Значение для вставки
-            
-        Raises:
-            IndexError: Если индекс вне допустимого диапазона
-        """
+        """Вставить по индексу. Допускаются idx==0 и idx==len."""
         if idx < 0 or idx > self._size:
-            raise IndexError("index out of range")
-
-        # Вставка в начало - используем prepend
-        if idx == 0:
+            raise IndexError("insert index out of range")
+        if idx == 0: # Если вставляем в начало
             self.prepend(value)
             return
-
-        # Создаем новый узел
-        new_node = Node(value)
-
-        # Находим узел, который будет предшествовать новому
-        current = self.head
-        for _ in range(idx - 1):
-            current = current.next  # Безопасно, так как idx <= _size
-
-        # Вставляем новый узел между current и current.next
-        new_node.next = current.next  # Новый узел ссылается на следующий
-        current.next = new_node       # Текущий узел ссылается на новый
-        self._size += 1
-
-    def remove_at(self, idx: int) -> None:
-        """
-        Удалить элемент по указанному индексу.
-        
-        Args:
-            idx: Индекс элемента для удаления
-            
-        Raises:
-            IndexError: Если индекс вне допустимого диапазона
-        """
-        if idx < 0 or idx >= self._size:
-            raise IndexError("index out of range")
-
-        # Удаление первого элемента (особый случай)
-        if idx == 0:
-            self.head = self.head.next  # Просто пропускаем первый узел
-            self._size -= 1
+        if idx == self._size: # Если вставляем в конец
+            self.append(value)
             return
 
-        # Находим узел, предшествующий удаляемому
-        current = self.head
+        # Вставка в середину
+        prev = self.head
         for _ in range(idx - 1):
-            current = current.next
+            assert prev is not None
+            prev = prev.next
+        assert prev is not None
+        node = Node(value, next=prev.next)
+        prev.next = node
+        self._size += 1
 
-        # Пропускаем удаляемый узел
-        # current.next - это удаляемый узел
-        # current.next.next - это узел после удаляемого
-        current.next = current.next.next
-        self._size -= 1
-
-    def remove(self, value: Any) -> bool:
-        """
-        Удалить первое вхождение указанного значения.
-        
-        Returns:
-            True если элемент был найден и удален, иначе False
-        """
-        if self.head is None:  # Список пуст
-            return False
-            
-        # Если удаляемый элемент - голова списка
-        if self.head.value == value:
-            self.head = self.head.next  # Пропускаем голову
-            self._size -= 1
-            return True
-
-        # Ищем узел с нужным значением
-        current = self.head
-        while current.next is not None:  # Проверяем следующий узел
-            if current.next.value == value:
-                # Нашли - пропускаем этот узел
-                current.next = current.next.next
+    def remove(self, value: Any) -> None:
+        """Удалить первое вхождение value. Если не найдено — ValueError."""
+        prev: Optional[Node] = None
+        cur = self.head
+        idx = 0
+        while cur:
+            if cur.value == value: # Если нашли значение
+                if prev is None:# Если удаляем голову
+                    self.head = cur.next # Голова становится следующим узлом
+                else:
+                    prev.next = cur.next
+                if cur is self.tail: # Если удаляем хвост
+                    self.tail = prev # Хвостом становится предыдущий узел
                 self._size -= 1
-                return True
-            current = current.next  # Переходим к следующему узлу
-            
-        return False  # Элемент не найден
+                return
+            prev, cur = cur, cur.next # Переходим к следующему узлу
+            idx += 1 # Увеличиваем индекс
+        raise ValueError("remove: value not found in SinglyLinkedList")
 
-    def __iter__(self):
-        """
-        Итератор для обхода значений списка.
-        
-        Yields:
-            Значения узлов от головы к хвосту
-        """
-        current = self.head
-        while current is not None:
-            yield current.value  # Возвращаем значение текущего узла
-            current = current.next  # Переходим к следующему узлу
+    def remove_at(self, idx: int) -> None:
+        """Удалить элемент по индексу. Возбуждает IndexError при неверном индексе."""
+        if idx < 0 or idx >= self._size:
+            raise IndexError("remove_at index out of range")
+        prev: Optional[Node] = None
+        cur = self.head
+        for _ in range(idx):
+            prev, cur = cur, cur.next  # type: ignore
+        assert cur is not None
+        if prev is None:
+            self.head = cur.next
+        else:
+            prev.next = cur.next
+        if cur is self.tail:
+            self.tail = prev
+        self._size -= 1 # Уменьшаем счетчик элементов
+
+# Метод для итерации по списку
+    def __iter__(self) -> Iterator[Any]:
+        cur = self.head
+        while cur:
+            yield cur.value
+            cur = cur.next
 
     def __len__(self) -> int:
-        """Вернуть количество элементов в списке."""
         return self._size
-
+# Метод для представления списка в виде строки
     def __repr__(self) -> str:
-        """Формальное строковое представление списка."""
-        values = list(self)  # Преобразуем итератор в список
-        return f"SinglyLinkedList({values})"
+        return f"SinglyLinkedList([{', '.join(repr(x) for x in self)}])"
 
-    def plotter(self) -> str:
-        """
-        Визуальное представление списка в виде цепочки узлов.
-        
-        Returns:
-            Строка вида: [A] -> [B] -> [C] -> None
-        """
+    def __str__(self) -> str:
         parts = []
-        current = self.head
-        
-        # Собираем значения всех узлов
-        while current is not None:
-            parts.append(f"[{current.value}]")
-            current = current.next
-            
-        # Добавляем None в конце для наглядности
+        cur = self.head
+        while cur:
+            parts.append(f"[{cur.value!s}]")
+            cur = cur.next
         parts.append("None")
-        
-        # Соединяем стрелками
         return " -> ".join(parts)
 
+sll = SinglyLinkedList()
+print(f'Длина нашего односвязанного списка : {len(sll)}')
 
-ll = SinglyLinkedList()
-ll.append(10)
-ll.prepend(5)
-ll.insert(1, 7)
-print(ll.plotter())  # [5] -> [7] -> [10] -> None
-ll.remove_at(1)
-print(ll.plotter())  # [5] -> [10] -> None
+sll.append(1)
+sll.append(2)
+sll.prepend(0)
+print(f'Наша ныняшняя длина списка после добавления эллементов : {len(sll)}') 
+print(f'Односвязаный список : {list(sll)}')
+
+sll.insert(1, 0.5)
+print(f'Длина списка после добавления на 1 индекс числа 0.5 : {len(sll)}')
+print(f'Односвязаный список : {list(sll)}')
+sll.append(52)
+print(f'Односвязанный список после добавления числа в конец : {list(sll)}')
+
+print(sll) 
