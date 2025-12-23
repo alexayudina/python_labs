@@ -86,7 +86,7 @@ if __name__ == "__main__":
      group = Group(r'C:\Users\HONOR\Documents\GitHub\laba_prog\data\students.csv')
      print(group.add(student('Юдина Александра Евгеньевна', '2007-05-15', 'БИВТ-25-1', 4.8)))
 ```
-# CRUD — 4 базовые операции с данными
+### CRUD — 4 базовые операции с данными
 ### Для Для list() 
 ```python
 print(group.list())
