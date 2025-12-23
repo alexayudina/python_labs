@@ -86,7 +86,7 @@ if __name__ == "__main__":
      group = Group(r'C:\Users\HONOR\Documents\GitHub\laba_prog\data\students.csv')
      print(group.add(student('Юдина Александра Евгеньевна', '2007-05-15', 'БИВТ-25-1', 4.8)))
 ```
-
+# CRUD — 4 базовые операции с данными
 ### Для Для list() 
 ```python
 print(group.list())
@@ -111,7 +111,7 @@ print(group.remove('Иванов Иван Иванович'))
 ```
 <img width="1418" height="67" alt="image04 " src="https://github.com/user-attachments/assets/584d3c7a-4ee1-4bcb-880f-e87d016d5ea8" />
 
-### Для Для update() 
+### Для Для update() #Необратимость, массовое повреждение, скрытые ошибки, нарушение связей
 ```python
 print(group.update('Васильев Дмитрий Андреевич', **{'birthdate': '2007.06/24', 'group': 'БИВТ-25-4', 'gpa': 4.2}))
 ```
