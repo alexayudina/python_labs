@@ -141,7 +141,7 @@ class Group:
 if __name__ == "__main__":
     group = Group("data/lab09/students.csv")
     
-    student = Student("Юдина Александра", "2007-06-25", "БИВТ25-5", 2.0)
+    student = Student("Юдина Александра Евгеньевна", "2007-05-15", "БИВТ25-5", 2.0)
     
     # print("1. Добавление студента...")
     # group.add(student)
@@ -163,4 +163,5 @@ if __name__ == "__main__":
 
     # print("\n6. Статистика:")
     # group.print_stats()
+
     
