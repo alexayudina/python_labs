@@ -17,7 +17,7 @@ class Student: # Объявление класса Student
     group: str
     gpa: float
 
-    def __post_init__(self):
+    def __post_init__(self): #метод инициализации объекта
         """Валидация данных после инициализации"""
         try:
             datetime.strptime(self.birthdate, "%Y-%m-%d") #преобразование строки в дату ГГГГ-ММ-ДД
@@ -48,7 +48,7 @@ class Student: # Объявление класса Student
             "gpa": self.gpa
         }
 
-    @classmethod
+    @classmethod #Декоратор, создающий метод класса.
     def from_dict(cls, data: Dict[str, Any]) -> 'Student':
         """Десериализация объекта из словаря"""
         return cls(
